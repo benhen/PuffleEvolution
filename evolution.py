@@ -75,7 +75,14 @@ def makeRandomChromosome():
     hairvalues = [0, 2]
     colorvalues = [1, 3, 9]#red, blue, green: 2: red, 4: redgreen, 10: redblue, 6: green, 18: blue, 12: greenblue
     eyesizevalues = [0, 2]
-    return [{'size': random.choice(sizevalues)}, {'hair': random.choice(hairvalues)}, {'color': random.choice(colorvalues)}, {'eyesize': random.choice(eyesizevalues)}]
+    
+    r = random.randint(0, 7)
+    v = None
+    if r < 3:
+        v = eyesizevalues[0]
+    else:
+        v = eyesizevalues[1]
+    return [{'size': random.choice(sizevalues)}, {'hair': random.choice(hairvalues)}, {'color': random.choice(colorvalues)}, {'eyesize': v}]
 
 def analyzePopulation(population):
     
@@ -290,7 +297,7 @@ for x in range(50):
             for i in range(random.randint(1, 6)):
                 newpop.append(mom.makeBabby(dad))
         elif (randval < 0.5):
-            for i in range(random.randint(1, 5)):
+            for i in range(random.randint(1, 6)):
                 newpop.append(mom.makeBabby(dad))
     if (len(newpop) == 0):
         print("Puffles have died out. Such is life. Diagnostics: generation is currently " + str(x+1))
